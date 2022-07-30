@@ -1,0 +1,16 @@
+<Project ToolsVersion="15.0">
+
+  <PropertyGroup>
+    <SteamLibraryPath>C:/SteamLibrary</SteamLibraryPath>
+    <GameName>One Step From Eden</GameName>
+    <GameID>960690</GameID>
+    <ModID>2842168759</ModID>
+  </PropertyGroup>
+
+  <!-- DO NOT EDIT BELOW -->
+  <PropertyGroup>
+    <GamePath>$(SteamLibraryPath)/steamapps/common/$(GameName)</GamePath>
+    <WorkshopPath>$(SteamLibraryPath)/steamapps/workshop/content/$(GameID)</WorkshopPath>
+    <ModPath>$(WorkshopPath)/$(ModID)</ModPath>
+  </PropertyGroup>
+</Project>
