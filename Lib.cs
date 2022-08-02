@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using Rewired;
 using UnityEngine;
+using System;
 
 namespace Patches
 {
@@ -8,8 +9,8 @@ namespace Patches
     [HarmonyPatch("Update")]
     class Player_Update
     {
-        private static float nextTime = 0.0f;
-        private static float interval = 0.1f;
+        private static DateTime nextTime = DateTime.Now;
+        private static TimeSpan interval = TimeSpan.FromMilliseconds(100);
 
         static void Postfix(Player __instance)
         {
@@ -17,13 +18,13 @@ namespace Patches
             var rewiredPlayer = p.rewiredPlayer;
             if (p.controlBlocks.Count < 1 && rewiredPlayer != null && !ControllerDisconnectCtrl.controllerDisconnectInProgress && !UIInputFieldVirtualKeyboard.inputCaptureInProgress)
             {
-                var time = Time.time;
+                var time = DateTime.Now;
                 if (rewiredPlayer.GetButtonTimedPress("FireOne", 0.5f) && time > nextTime)
                 {
                     nextTime = time + interval;
                     p.QueueAction(InputAction.FireOne);
                 }
-                else if (rewiredPlayer.GetButtonTimedPress("FireTwo", 0.5f) && Time.time > nextTime)
+                else if (rewiredPlayer.GetButtonTimedPress("FireTwo", 0.5f) && time > nextTime)
                 {
                     nextTime = time + interval;
                     p.QueueAction(InputAction.FireTwo);
